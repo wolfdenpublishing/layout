@@ -7,7 +7,7 @@ A simple but powerful device and display-size independent layout manager for the
 The layout manager makes it easy to create *regions*, rectangular areas defined relative to the screen, the stage (which may or may not be the full screen), and to the previously created user-defined regions. The final regions are created with content coordinates. No actual display objects are created, the programmer is free to utilize the defined regions in any manner. There are default 'screen' and 'stage' regions, but the real power of the layout manager is its ability to easily define new regions using simple but powerful positioning and sizing options relative to any region that already exists.
 
 
-**See [doc/index.html](doc/index.html) for the full documentation.**
+**Download or clone the repository and open [doc/index.html](doc/index.html) for the full documentation.**
 
 ## Examples
 
