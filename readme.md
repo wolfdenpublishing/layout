@@ -43,7 +43,7 @@ _Note that it is the same code for all devices_, the layout manager is device an
 
 ## Author
 
-[Ron Pacheco](ron@wolfden.pub)
+[Ron Pacheco](mailto:ron@wolfden.pub)
 [Wolfden Publishing, LLC](http://www.wolfden.pub/)
 
 ## License
