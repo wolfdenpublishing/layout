@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Layout Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Layout</h1>
+
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>Layout</strong></li>
+</ul>
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/config.lua.html">config.lua</a></li>
+  <li><a href="../examples/example-01.lua.html">example-01.lua</a></li>
+  <li><a href="../examples/example-02.lua.html">example-02.lua</a></li>
+  <li><a href="../examples/example-03.lua.html">example-03.lua</a></li>
+  <li><a href="../examples/example-04.lua.html">example-04.lua</a></li>
+  <li><a href="../examples/example-05.lua.html">example-05.lua</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Layout</code></h1>
+<p>
+<h2>layout.lua</h2>
+<p> A simple but powerful device and display-size independent layout manager for the Corona SDK.</p>
+</p>
+<p> <strong>OVERVIEW</strong></p>
+
+<p> The layout manager creates <em>regions</em> that are rectangular areas defined in content coordinates.
+ No actual display objects are created, and the programmer is free to utilize the defined regions
+ in any manner. There are default 'screen' and 'stage' regions, but the real power of the layout
+ manager is its ability to easily define new regions using simple but powerful positioning and
+ sizing options.</p>
+
+<p> Each <strong>region</strong> is stored as a table within the layout manager object. Each region contains the
+ following fields that define the region:</p>
+
+<ul>
+    <li><code>width</code>: (<strong><em>number</em></strong>) region width in content units</li>
+    <li><code>height</code>: (<strong><em>number</em></strong>) region height in content units</li>
+    <li><code>top</code>: (<strong><em>number</em></strong>) content coordinate for top region edge</li>
+    <li><code>right</code>: (<strong><em>number</em></strong>) content coordinte for right region edge</li>
+    <li><code>bottom</code>: (<strong><em>number</em></strong>) content coordinate for bottom region edge</li>
+    <li><code>left</code>: (<strong><em>number</em></strong>) content coordinate for left region edge</li>
+    <li><code>xCenter</code>: (<strong><em>number</em></strong>) content coordiate for horizontal center</li>
+    <li><code>yCenter</code>: (<strong><em>number</em></strong>) content coordinate for vertical center</li>
+    <li><code>xPct</code>: (<strong><em>number</em></strong>) content units for 1% of the region width</li>
+    <li><code>yPct</code>: (<strong><em>number</em></strong>) content units for 1% of the region height</li>
+    <li><code>aspect</code>: (<strong><em>number</em></strong>) ratio of region width to height (i.e. width / height)</li>
+    <li><code>isPortrait</code>: (<strong><em>bool</em></strong>) true if aspect &lt;= 1</li>
+</ul>
+
+<p> <strong>EXAMPLES</strong></p>
+
+<p> To quickly observe and understand the power and flexibility of the Layout manager, run the
+ examples in the Corona simulator and switch around to different devices and orientations.</p>
+
+<p> The "examples" subfolder contains several examples of how to use the Layout manager. To run
+ an example, copy the "example-##.lua" (where ## is a two digit number) file to main.lua, and
+ then run the main.lua with the Corona simulator. The build.settings and config.lua files do
+ not need to be changed (unless you want to experiment with different settings), these two
+ files work with all the examples. Simply copy the example you want to try to main.lua and run.</p>
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">local LayoutManager = require( &quot;layout&quot; )</pre>
+    </ul>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: 2016 <a href="http://www.wolfden.pub/">Wolfden Publishing</a>, <a href="mailto:ron@wolfden.pub">Ron Pacheco</a></li>
+        <li><strong>Release</strong>: 1.0.0-2016.06.22</li>
+        <li><strong>License</strong>: <a href="https://opensource.org/licenses/MIT">MIT</a></li>
+        <li><strong>Author</strong>: <a href="mailto:ron@wolfden.pub">Ron Pacheco</a></li>
+    </ul>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Layout:new">Layout:new ()</a></td>
+	<td class="summary">Constructor - build and return a new Layout object.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Layout:addRegion">Layout:addRegion (dimens)</a></td>
+	<td class="summary">addRegion - add a new region to the layout manager.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Layout:removeRegion">Layout:removeRegion (id)</a></td>
+	<td class="summary">removeRegion - remove a region from the layout.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Layout:adjustRegion">Layout:adjustRegion (dimens)</a></td>
+	<td class="summary">adjustRegion - change a region's size and/or position.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Layout:regionRect">Layout:regionRect (id)</a></td>
+	<td class="summary">regionRect - return a display rect matching a specified region.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Layout:new"></a>
+    <strong>Layout:new ()</strong>
+    </dt>
+    <dd>
+
+<p>Constructor - build and return a new Layout object. </p>
+
+<p> The new Layout object will contain the following entries:</p>
+
+<ul>
+    <li><code>pixel</code>: (<strong>number</strong>) content units for one screen pixel (assumes device to have square pixels;
+    if not, this value will represent the content units for one pixel in the largest screen dimension)</li>
+    <li><code>screen</code>: (<strong>region</strong>) content region for the full screen</li>
+    <li><code>stage</code>: (<strong>region</strong>) content region for the stage (generally the same as the screen minus the status bar)</li>
+    <li><code>pixels</code>: (<strong>region</strong>) special region for positioning and sizing by pixels</li>
+</ul>
+
+
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        new Layout object
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> Layout = LayoutManager:new()</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Layout:addRegion"></a>
+    <strong>Layout:addRegion (dimens)</strong>
+    </dt>
+    <dd>
+    addRegion - add a new region to the layout manager.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dimens</span>
+
+<p> a table specifying the options for the new region:</p>
+
+<ul>
+    <li><code>id</code>: (<strong><em>string</em></strong>) <strong>required</strong> unique identifier for the new region</li>
+    <li><code>sizeTo</code>: (<strong><em>string</em></strong>) id of region to size against (default: "stage")</li>
+    <li><code>width</code>: (<strong><em>number</em></strong>) new region width as a percentage of the <code>sizeTo</code> region (default: 100)</li>
+    <li><code>height</code>: (<strong><em>number</em></strong>) new region height as a percentage of the 'sizeTo' region (default: 100)</li>
+    <li><code>positionTo</code>: (<strong><em>string</em></strong>) id of region to position relative to (defaults to <code>sizeTo</code> region)</li>
+    <li><code>horizontal</code>: (<strong><em>string</em></strong>) one of: "before", "left", "center", "right", "after" (default: "center")</li>
+    <li><code>vertical</code>: (<strong><em>string</em></strong>) one of: "above", "top", "center", "bottom", "below" (default: "center")</li>
+    <li><code>padTo</code>: (<strong><em>string</em></strong>) id of region to pad relative to (defaults to <code>sizeTo</code> region)</li>
+    <li><code>padding</code>: (<strong><em>table</em></strong>) array of: <code>{top=#, right=#, bottom=#, left=#}</code> (all #'s default to 0)</li>
+</ul>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Layout:removeRegion"></a>
+    <strong>Layout:removeRegion (id)</strong>
+    </dt>
+    <dd>
+    removeRegion - remove a region from the layout.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         id of the region to be removed
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">Layout:removeRegion( <span class="string">"toolbar"</span> )</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "Layout:adjustRegion"></a>
+    <strong>Layout:adjustRegion (dimens)</strong>
+    </dt>
+    <dd>
+    adjustRegion - change a region's size and/or position.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dimens</span>
+
+<p> a table specifying the adjustments for the region:</p>
+
+<ul>
+    <li><code>id</code>: (<strong><em>string</em></strong>) <strong>required</strong> unique identifier for the new region</li>
+    <li><code>width</code>: (<strong><em>number</em></strong>) new region width in <em>content</em> units (default: no change)</li>
+    <li><code>height</code>: (<strong><em>number</em></strong>) new region height in <em>content</em> units (default: no change)</li>
+    <li><code>xCenter</code>: (<strong><em>number</em></strong>) new region horizontal center in <em>content</em> coordinates (default: no change)</li>
+    <li><code>yCenter</code>: (<strong><em>number</em></strong>) new region vertical center in <em>content</em> coordinates (default: no change)</li>
+</ul>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Layout:regionRect"></a>
+    <strong>Layout:regionRect (id)</strong>
+    </dt>
+    <dd>
+    regionRect - return a display rect matching a specified region.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">id</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         id of the region for which to return a display rect
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        ShapeObject (as returned by <a href="https://docs.coronalabs.com/api/library/display/newRect.html">display.newRect()</a>)
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"><span class="keyword">local</span> toolbarRect = Layout:regionRect( <span class="string">"toolbar"</span> )</pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-06-22 15:44:43 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

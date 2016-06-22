@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>Layout Reference</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>Layout</h1>
+
+
+
+
+<h2>Examples</h2>
+<ul class="nowrap">
+  <li><a href="../examples/config.lua.html">config.lua</a></li>
+  <li><a href="../examples/example-01.lua.html">example-01.lua</a></li>
+  <li><a href="../examples/example-02.lua.html">example-02.lua</a></li>
+  <li><strong>example-03.lua</strong></li>
+  <li><a href="../examples/example-04.lua.html">example-04.lua</a></li>
+  <li><a href="../examples/example-05.lua.html">example-05.lua</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../index.html">layout</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+    <h2>example-03.lua</h2>
+<pre>
+<span class="comment">-- ========================================================================== --
+</span><span class="comment">-- example-03.lua
+</span><span class="comment">--
+</span><span class="comment">-- Similar to example-02, except now the header and footer regions decide
+</span><span class="comment">-- whether the device is in portrait or landscape. If in landscape, the header
+</span><span class="comment">-- puts itself on the left instead of the top, and the footer puts itself on the
+</span><span class="comment">-- right instead of the bottom.
+</span>
+<span class="comment">-- layout.lua is in parent folder
+</span><span class="global">package</span>.path = <span class="string">"../?.lua;"</span> .. <span class="global">package</span>.path
+<span class="keyword">local</span> LayoutManager = <span class="global">require</span>( <span class="string">"layout"</span> )
+
+<span class="comment">-- layout manager object
+</span><span class="keyword">local</span> Layout
+
+<span class="comment">-- Group to hold rects that display the regions
+</span><span class="keyword">local</span> Regions
+
+<span class="comment">-- layout creation
+</span><span class="keyword">local</span> <span class="keyword">function</span> createLayout()
+	<span class="comment">-- init the layout manager
+</span>	Layout = LayoutManager:new()
+	<span class="comment">-- device is in portrait orientation
+</span>	<span class="keyword">if</span> ( Layout.stage.isPortrait ) <span class="keyword">then</span>
+		<span class="comment">-- create a header occupying 10% of the stage
+</span>		Layout:addRegion( { id = <span class="string">"header"</span>, vertical = <span class="string">"top"</span>, height = <span class="number">10</span> } )
+		<span class="comment">-- create a content area below the header with some small padding
+</span>		Layout:addRegion( { id = <span class="string">"content"</span>, positionTo = <span class="string">"header"</span>, vertical = <span class="string">"below"</span>, height = <span class="number">83</span>, padding = { top = <span class="number">1</span> } } )
+		<span class="comment">-- create a footer area at the bottom of the stage
+</span>		Layout:addRegion( { id = <span class="string">"footer"</span>, vertical = <span class="string">"bottom"</span>, height = <span class="number">5</span> } )
+	<span class="comment">-- device is in landscape orientation
+</span>	<span class="keyword">else</span>
+		<span class="comment">-- create a header occupying 10% of the stage
+</span>		Layout:addRegion( { id = <span class="string">"header"</span>, horizontal = <span class="string">"left"</span>, width = <span class="number">10</span> } )
+		<span class="comment">-- create a content area below the header with some small padding
+</span>		Layout:addRegion( { id = <span class="string">"content"</span>, positionTo = <span class="string">"header"</span>, horizontal = <span class="string">"after"</span>, width = <span class="number">83</span>, padding = { left = <span class="number">1</span> } } )
+		<span class="comment">-- create a footer area at the bottom of the stage
+</span>		Layout:addRegion( { id = <span class="string">"footer"</span>, horizontal = <span class="string">"right"</span>, width = <span class="number">5</span> } )
+	<span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">-- ========================================================================== --
+</span>
+<span class="comment">-- helper function to display a region as a rect
+</span><span class="keyword">local</span> <span class="keyword">function</span> showRegion( id, fill )
+	<span class="keyword">local</span> rect = Layout:regionRect( id )
+	Regions:insert( rect )
+	rect.fill = fill <span class="keyword">or</span> { <span class="number">0</span>, <span class="number">0</span> }
+	rect.stroke = { <span class="number">1</span>, <span class="number">1</span> }
+	rect.strokeWidth = Layout.pixel
+	<span class="keyword">local</span> region = Layout[id]
+	<span class="keyword">local</span> text = display.newText( id, region.xCenter, region.yCenter, native.systemFont, <span class="number">20</span> * Layout.pixel )
+	Regions:insert( text )
+	text.fill = { <span class="number">1</span>, <span class="number">1</span> }
+<span class="keyword">end</span>
+
+<span class="comment">-- for demo purposes just display the layout regions as rects on the screen
+</span><span class="keyword">local</span> <span class="keyword">function</span> showLayout()
+	Regions = display.newGroup()
+	showRegion( <span class="string">"header"</span>, {<span class="number">0.5</span>,<span class="number">0</span>,<span class="number">0</span>} )
+	showRegion( <span class="string">"content"</span>, {<span class="number">1</span>,<span class="number">0.5</span>} )
+	showRegion( <span class="string">"footer"</span>, {<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.5</span>} )
+<span class="keyword">end</span>
+
+<span class="comment">-- ========================================================================== --
+</span>
+<span class="comment">-- orientation change listener
+</span><span class="keyword">local</span> <span class="keyword">function</span> onOrientationChange( event )
+	Regions:removeSelf()
+	Regions = <span class="keyword">nil</span>
+	createLayout()
+	showLayout()
+<span class="keyword">end</span>
+
+<span class="comment">-- add listener for orientation change
+</span>Runtime:addEventListener( <span class="string">"orientation"</span>, onOrientationChange )
+
+<span class="comment">-- ========================================================================== --
+</span>
+<span class="comment">-- initial layout and display
+</span>createLayout()
+showLayout()</pre>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2016-06-22 17:03:47 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
